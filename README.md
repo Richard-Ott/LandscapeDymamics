@@ -1,10 +1,10 @@
-# Landscape Evolution
-Welcome to the Landscape evolution course taught at University of Amsterdam. In
+# Landscape Dynamics
+Welcome to the Landscape Dynamics course taught at University of Amsterdam. In
 this course, you will work through interactive Matlab Live scripts to learn how
 to perform a standard topographic analysis. Most of the analysis is based on 
 TopoToolbox.
 
-TopoToolbox can be downloaded here: https://github.com/wschwanghart/topotoolbox
+TopoToolbox3 can be downloaded here: https://topotoolbox.github.io/
 and Wolfgang Schwanghart has created a helpful blog that can be accessed here
 https://topotoolbox.wordpress.com/
 
