@@ -39,6 +39,7 @@
     .copy { position:absolute; top:.6rem; right:.6rem; background:transparent; border:1px solid var(--code-border); color:var(--muted); padding:.25rem .5rem; border-radius:8px; cursor:pointer }
     .note { border-left: 4px solid var(--accent); padding:.5rem .75rem; background:rgba(167,139,250,.08); color:#e9d5ff; border-radius:8px; }
     .ok { border-left: 4px solid var(--ok); background: rgba(52,211,153,.08); color:#bbf7d0 }
+    .warn { border-left: 4px solid var(--warn); background: rgba(251,191,36,.10); color:#fde68a }
 
     a { color: var(--brand); text-decoration: none; border-bottom:1px dashed transparent }
     a:hover { border-bottom-color: var(--brand) }
@@ -63,9 +64,19 @@
       <ol>
         <li>Go to <a href="https://github.com/Richard-Ott/LandscapeDymamics">LandscapeDynamics GitHub repository</a>.</li>
         <li>Click <em>Code ▸ Download ZIP</em>.</li>
-        <li>Unzip to a folder you can find, e.g., <span class="kb">Documents\\fastscape-practical</span>.</li>
+        <li>Unzip to a folder you can find again, e.g., <span class="kb">Documents\fastscape-practical</span> (Windows) or <span class="kb">Documents/fastscape-practical</span> (macOS).</li>
       </ol>
-      <p><strong>Option B: Clone with Git</strong></p>
+
+      <p><strong>Reminder:</strong> after unzipping, you should have a folder named <span class="kb">LandscapeDymamics</span>.</p>
+
+      <hr style="border:0;border-top:1px solid var(--code-border);margin:1rem 0;opacity:.7">
+
+      <p><strong>Option B: Clone with Git (alternative)</strong></p>
+      <p class="note warn">Only use this option if you already have <strong>Git</strong> installed.</p>
+      <ol>
+        <li>Open <strong>Anaconda Prompt</strong> (Windows) or <strong>Terminal</strong> (macOS/Linux).</li>
+        <li>Run:</li>
+      </ol>
       <pre><button class="copy" data-copy>Copy</button><code>git clone https://github.com/Richard-Ott/LandscapeDymamics.git
 cd LandscapeDymamics</code></pre>
     </div>
@@ -78,53 +89,97 @@ cd LandscapeDymamics</code></pre>
         <li><strong>Miniconda alternative:</strong> <a href="https://www.anaconda.com/download/success">Miniconda installer</a></li>
       </ul>
       <p class="note">Already have Anaconda/Miniconda? You can keep it. Using Miniforge is recommended for reproducible, conda-forge-only environments.</p>
+
       <h3>(Nice to have) Install <em>mamba</em> in base</h3>
-      <p>Run this command in <strong>Anaconda Prompt</strong> (Windows) or <strong>Terminal</strong> (macOS/Linux):</p>
+
+      <p><strong>First:</strong> open <strong>Anaconda Prompt</strong> (Windows) or <strong>Terminal</strong> (macOS/Linux).</p>
+
+      <div class="grid">
+        <div class="note">
+          <strong>How to open Anaconda Prompt (Windows)</strong>
+          <ol style="margin:.5rem 0 0 1.25rem">
+            <li>Click the <strong>Start Menu</strong> (Windows icon).</li>
+            <li>Type: <span class="kb">Anaconda Prompt</span></li>
+            <li>Click <strong>Anaconda Prompt</strong>.</li>
+          </ol>
+          <p style="margin:.5rem 0 0">You should see a line like <span class="kb">(base) C:\Users\YourName&gt;</span></p>
+        </div>
+
+        <div class="note">
+          <strong>How to open Terminal (macOS / Linux)</strong>
+          <ul style="margin:.5rem 0 0 1.25rem">
+            <li><strong>macOS:</strong> press <span class="kb">⌘</span> + <span class="kb">Space</span>, type <span class="kb">Terminal</span>, press <span class="kb">Enter</span>.</li>
+            <li><strong>Linux:</strong> press <span class="kb">Ctrl</span> + <span class="kb">Alt</span> + <span class="kb">T</span>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <p>Run this command:</p>
       <pre><button class="copy" data-copy>Copy</button><code>conda install -n base -c conda-forge mamba</code></pre>
+      <p class="note ok"><strong>If asked</strong> <span class="kb">Proceed? (y/n)</span> → type <span class="kb">y</span> and press <span class="kb">Enter</span>.</p>
     </div>
 
     <h2>Step 2 — Locate the Environment File</h2>
     <div class="card">
-      <p>The <span class="kb">initiate.yml</span> file is provided in the <span class="kb">P_Fastscape</span> folder of the repository you downloaded. Use this file to create your environment.</p>
+      <p>Inside the repository you downloaded/cloned, find this file:</p>
+      <pre><code>LandscapeDymamics/P_Fastscape/initiate.yml</code></pre>
+      <p class="note warn"><strong>Important:</strong> In the next step, you must run commands from inside the <span class="kb">P_Fastscape</span> folder.</p>
     </div>
 
     <h2>Step 3 — Create the Conda Environment</h2>
     <div class="card">
-      <p>
-        <span class="pill">Windows</span>
-      </p>
+      <p><span class="pill">Windows</span></p>
       <ol>
-        <li>Open <strong>Anaconda Prompt</strong>.</li>
-        <li>Navigate to the <span class="kb">P_Fastscape</span> folder inside the repository:</li>
+        <li><strong>Open Anaconda Prompt</strong> (Start Menu → type <span class="kb">Anaconda Prompt</span> → open it).</li>
+
+        <li><strong>Go to the P_Fastscape folder</strong></li>
+
+        <p class="note"><strong>Method A (copy/paste):</strong> If you unzipped the repository into <span class="kb">Documents</span>, run:</p>
         <pre><button class="copy" data-copy>Copy</button><code>cd %HOMEPATH%\Documents\LandscapeDymamics\P_Fastscape</code></pre>
-        <li>Create the environment (name it <code>fastscape-class</code>):
-          <pre><button class="copy" data-copy>Copy</button><code>mamba env create -f initiate.yml -n fastscape-class</code></pre>
-          <p>If you don’t have mamba yet, use:</p>
-          <pre><button class="copy" data-copy>Copy</button><code>conda env create -f initiate.yml -n fastscape-class</code></pre>
-        </li>
-        <li>Activate it and launch Jupyter:
-          <pre><button class="copy" data-copy>Copy</button><code>conda activate fastscape-class
+
+        <p class="note"><strong>Check you are in the right folder</strong> (you should see <span class="kb">initiate.yml</span>):</p>
+        <pre><button class="copy" data-copy>Copy</button><code>dir</code></pre>
+
+        <p class="note"><strong>Method B (beginner-friendly):</strong> Use File Explorer to copy the folder path.</p>
+        <ol>
+          <li>Open <strong>File Explorer</strong> and go into the course folder.</li>
+          <li>Open the folder <span class="kb">P_Fastscape</span>.</li>
+          <li>Click the address bar (top), copy the full path.</li>
+          <li>In Anaconda Prompt, type:</li>
+        </ol>
+        <pre><button class="copy" data-copy>Copy</button><code>cd "PASTE_THE_PATH_HERE"</code></pre>
+
+        <li><strong>Create the environment</strong> (name: <span class="kb">fastscape-class</span>)</li>
+        <p>If you installed mamba:</p>
+        <pre><button class="copy" data-copy>Copy</button><code>mamba env create -f initiate.yml -n fastscape-class</code></pre>
+        <p>If you don’t have mamba:</p>
+        <pre><button class="copy" data-copy>Copy</button><code>conda env create -f initiate.yml -n fastscape-class</code></pre>
+
+        <li><strong>Activate it and launch Jupyter</strong></li>
+        <pre><button class="copy" data-copy>Copy</button><code>conda activate fastscape-class
 jupyter notebook</code></pre>
-        </li>
       </ol>
 
-      <p>
-        <span class="pill">macOS / Linux</span>
-      </p>
+      <p><span class="pill">macOS / Linux</span></p>
       <ol>
-        <li>Open the <strong>Terminal</strong> app.</li>
-        <li>Go to the <span class="kb">P_Fastscape</span> folder inside the repository:
-          <pre><button class="copy" data-copy>Copy</button><code>cd ~/Documents/LandscapeDymamics/P_Fastscape</code></pre>
-        </li>
-        <li>Create the environment (name <code>fastscape-class</code>):
-          <pre><button class="copy" data-copy>Copy</button><code>mamba env create -f initiate.yml -n fastscape-class</code></pre>
-          <p>No mamba?</p>
-          <pre><button class="copy" data-copy>Copy</button><code>conda env create -f initiate.yml -n fastscape-class</code></pre>
-        </li>
-        <li>Activate and launch Jupyter:
-          <pre><button class="copy" data-copy>Copy</button><code>conda activate fastscape-class
+        <li>Open <strong>Terminal</strong>.</li>
+
+        <li><strong>Go to the P_Fastscape folder</strong></li>
+        <p class="note">If you put the repository in <span class="kb">Documents</span>, run:</p>
+        <pre><button class="copy" data-copy>Copy</button><code>cd ~/Documents/LandscapeDymamics/P_Fastscape</code></pre>
+
+        <p class="note"><strong>Check you are in the right folder</strong> (you should see <span class="kb">initiate.yml</span>):</p>
+        <pre><button class="copy" data-copy>Copy</button><code>ls</code></pre>
+
+        <li><strong>Create the environment</strong> (name: <span class="kb">fastscape-class</span>)</li>
+        <p>If you installed mamba:</p>
+        <pre><button class="copy" data-copy>Copy</button><code>mamba env create -f initiate.yml -n fastscape-class</code></pre>
+        <p>If you don’t have mamba:</p>
+        <pre><button class="copy" data-copy>Copy</button><code>conda env create -f initiate.yml -n fastscape-class</code></pre>
+
+        <li><strong>Activate and launch Jupyter</strong></li>
+        <pre><button class="copy" data-copy>Copy</button><code>conda activate fastscape-class
 jupyter notebook</code></pre>
-        </li>
       </ol>
 
       <div class="note ok">
@@ -135,7 +190,7 @@ jupyter notebook</code></pre>
     <h2>Step 4 — Open the Practical Notebook</h2>
     <div class="card">
       <ol>
-        <li>In the Jupyter file browser, navigate into the folder you downloaded (e.g., <code>LandscapeDymamics/notebooks</code>).</li>
+        <li>In the Jupyter file browser, navigate into the folder you downloaded/cloned (e.g., <code>LandscapeDymamics/notebooks</code>).</li>
         <li>Open the practical notebook (e.g., <code>01_fastscape_practical.ipynb</code>).</li>
         <li>The import check will run automatically in the first lines of the notebook when you import all the modules.</li>
       </ol>
