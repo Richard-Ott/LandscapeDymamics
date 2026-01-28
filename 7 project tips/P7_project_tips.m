@@ -76,5 +76,19 @@ DEM = crop(DEM, 'interactive');
 
 % this lets you draw a rectangle and crop a raster.
 
+%% Dealing with NaN's and 0 values in raster
 
+% Sometimes you have parts of the sea as 0 values in the DEM, but it would
+% be better to have them as NaN. Otherwise TT will try to calculate weird
+% streams that flow in the flat sea.
+% Let's remove 0 elevation values and make them NaN
+DEM.Z(DEM.Z == 0) = nan;   % try to understand the logic of this line
+
+% Sometimes you have RUSLE factors with many missing values (NaN's) in your
+% area. Often it makes sense to simply assing the mean of all existing
+% values to the missing pixels. That is a quick and easy solution to fill
+% these gaps.
+
+CfactorInterpolated = Cfactor;
+CfactorInterpolated.Z(isnan(CfactorInterpolated.Z)) = mean(CfactorInterpolated.Z(:),'omitnan');
 
