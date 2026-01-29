@@ -92,3 +92,63 @@ DEM.Z(DEM.Z == 0) = nan;   % try to understand the logic of this line
 CfactorInterpolated = Cfactor;
 CfactorInterpolated.Z(isnan(CfactorInterpolated.Z)) = mean(CfactorInterpolated.Z(:),'omitnan');
 
+%% Don't forget to adjust your color map axis!!
+% in the practicals we sometimes apply limits to the color maps. Only do
+% that if there is a visual reason to do this. Do this for instance, if you
+% have a few very high values that make it so that most of the values have
+% the same color and you can't see patterns. As default, don't use a limit
+% of the colormaps (caxis, clim). 
+
+plotc(S,ksn)
+colorbar
+
+% this plot has a few very high values, realted to DEM artefacts. That's
+% why we use a limit on the colormaps. Always play around with the value to
+% make sure you get something that works well for your data.
+
+plotc(S,ksn)
+clim([0 100])
+colorbar
+
+%% How to use global lithologic map
+
+GEO = GRIDobj();
+GEO = crop(GEO, 'interactive');   % crop global map to your general region. This makes resampling and computation easier.
+GEO = resample2utm(GEO,'zone', 'someUTMzone');
+GEO = resample(GEO,DEM,'nearest');
+
+% Here's the legend for the global lithologic map:
+% 1 Unconsolidated sediments
+% 2 Siliciclastic sedimentary rocks
+% 3 Pyroclastics
+% 4 Mixed sedimentary rocks
+% 5 Carbonate sedimentary rocks
+% 6 Evaporites
+% 7 Acid volcanic rocks
+% 8 Intermediate volcanic rocks
+% 9 Basic volcanic rocks
+% 10 Acid plutonic rocks
+% 11 Intermediate plutonic rocks
+% 12 Basic plutonic rocks
+% 13 Metamorphics
+% 14 Water Bodies
+% 15 Ice and Glaciers
+% nd No Data
+
+% simplify map. IN YOUR REGION YOU PROBABLY WANT METAMORPHIC ROCKS
+% SEPARATE (DIFFERENT FROM THE PRACTICAL). The only reason I grouped
+% metamorphic and magmatic rocks in the practical, is because I knew that
+% in the BW are very similar. 
+ids = cell(6,1);                                % empty lithology ID matrix
+ids{1} = 1;                                  % unconsolidated sediments
+ids{2} = [7,8,9,10,11,12];                   % Magmatic
+ids{3} = 2;                                  % siliciclastic sediments
+ids{4} = 4;                                  % mixed sediments
+ids{5} = 5;                                  % carbonates
+ids{6} = 13;                                 % metamorphic
+ids{7} = [3 6 14 15 16];                     % Other: evaporites, water, ice and no data
+geo_names = {'unconsolidated  sediment','magmatic', 'siliciclastic  sediment', ...
+    'mixed  sediment', 'carbonates', 'metamorphic','other'};
+
+
+
